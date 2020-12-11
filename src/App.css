@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+/* For Error */
+.not-valid{
+  border: 1px solid red !important;
+}
+.error{
+  color: red !important;
+}
