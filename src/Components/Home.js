@@ -5,19 +5,10 @@ import TransactionHistory from './TransactionHistory';
 import AddTransaction from './AddTransaction';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
+
 function Home() {
   return (
-    <div className="App">
-        <Router>
-            <Navbar />
-            <Switch>
-                <Route path="/ViewBalance" exact component={ViewBalance} />
-                <Route path="/AddTransaction" component={AddTransaction} />
-                <Route path="/TransactionHistory" component={TransactionHistory} />
-            </Switch>
-        </Router>
-      </div>
+    null
   );
 }
-
 export default Home;

@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
-import '../App.css';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-class Navbar extends Component {
-  render() {
-    return (
-      <div className="navbar">
-        <a href="./ViewBalance">Home</a>
-        <a href="./AddTransaction">Add Transaction</a>
-        <a href="./TransactionHistory">Transaction History</a>
-        <a href="#" className="right">Sign out</a>
-      </div>
-    );
+function Navbar() {
+
+  const history = useHistory();
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    history.push("/login")
   }
+
+  return (
+    <div className="navbar">
+      <a href="./Home">Home</a>
+      <br />
+      <a href="./AddTransaction">Add Transaction</a>
+      <br />
+      <a href="./TransactionHistory">Transaction History</a>
+      <br />
+      <a className="right" onClick={handleLogout}>Sign Out</a>
+    </div>
+  );
 }
- 
-export default Navbar
+
+export default Navbar;
