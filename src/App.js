@@ -1,8 +1,9 @@
 import './App.css';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import TransactionHistory from './components/TransactionHistory';
-import AddTransaction from './components/AddTransaction';
+import Navbar from './Components/Navbar';
+import Home from './Components/Home';
+import ViewBalance from './Components/ViewBalance';
+import TransactionHistory from './Components/TransactionHistory';
+import AddTransaction from './Components/AddTransaction';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <div className="App">
         <Navbar />
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={ViewBalance} />
           <Route path="/AddTransaction" component={AddTransaction} />
           <Route path="/TransactionHistory" component={TransactionHistory} />
         </Switch>
