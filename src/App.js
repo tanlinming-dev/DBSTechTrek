@@ -1,8 +1,8 @@
 import './App.css';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import TransactionHistory from './components/TransactionHistory';
-import AddTransaction from './components/AddTransaction';
+import Navbar from './Components/Navbar';
+import Home from './Components/Home';
+import TransactionHistory from './Components/TransactionHistory';
+import AddTransaction from './Components/AddTransaction';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
