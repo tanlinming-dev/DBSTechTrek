@@ -61,7 +61,7 @@ function Loginpage() {
 
                     <div className="form-group">
                         <label>Password</label>
-                        <input type="text" className="form-control" placeholder="Enter Password" onChange={handlePassword} />
+                        <input type="password" className="form-control" placeholder="Enter Password" onChange={handlePassword} />
                     </div>
 
                     <br />
