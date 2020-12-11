@@ -11,7 +11,7 @@ function Home() {
         <Router>
             <Navbar />
             <Switch>
-                <Route path="/" exact component={ViewBalance} />
+                <Route path="/ViewBalance" exact component={ViewBalance} />
                 <Route path="/AddTransaction" component={AddTransaction} />
                 <Route path="/TransactionHistory" component={TransactionHistory} />
             </Switch>
