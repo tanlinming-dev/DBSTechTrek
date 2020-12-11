@@ -34,6 +34,9 @@ function Loginpage() {
                 // console.log(res.data);
                 // Auth?.setLoggedIn(true);
                 sessionStorage.setItem("isLoggedIn", true);
+                let expiry = new Date();
+					expiry.setSeconds(expiry.getSeconds() + 60);
+                sessionStorage.setItem("expiry",expiry);
                 sessionStorage.setItem("custID", res.data["custID"])
                 history.push("/");
             }).catch((error) => {

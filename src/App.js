@@ -5,25 +5,25 @@ import AddTransaction from './Components/AddTransaction';
 import Loginpage from './Components/Loginpage';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { useState } from 'react'
-
+import PrivateRoute from './Components/PrivateRoute';
 // export const AuthContext = React.createContext(null);
 
 function App() {
 
   // const [isLoggedIn, setLoggedIn] = useState(false);
-  sessionStorage.setItem("isLoggedIn", false)
+  
 
   let routes;
 
-  if (sessionStorage.getItem("isLoggedIn") == true) {
     routes = (
       <Switch>
-        <Route path="/home" component={Home} />
-        <Route path="/AddTransaction" component={AddTransaction} />
-        <Route path="/TransactionHistory" component={TransactionHistory} />
-        <Redirect to="/home" />
+        <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute path="/AddTransaction" component={AddTransaction} />
+        <PrivateRoute path="/TransactionHistory" component={TransactionHistory} />
+        <Route exact path='/login' component={Loginpage} />
       </Switch>
     );
+    /*
   } else {
     routes = (
       <Switch>
@@ -34,7 +34,7 @@ function App() {
       </Switch>
     )
   }
-
+*/
   return (
     // <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
     <div className="App">
