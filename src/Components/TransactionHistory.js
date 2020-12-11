@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 export default class TransactionHistory extends React.Component {
   state = {
     userTransactions: [],
+    userInboundTransactions: [],
     userExpenditureSum: [],
     overallAverageExpenditure: [],
     chartData: {},
@@ -22,7 +23,7 @@ export default class TransactionHistory extends React.Component {
     };
 
     const info = {
-      'custID': 17
+      'custID': parseInt(sessionStorage.getItem('custID'))
     }
 
     axios.post(`https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/users`, null, config)
@@ -58,7 +59,7 @@ export default class TransactionHistory extends React.Component {
           }
         })
 
-        const userTransactions = res.data.filter(transaction => transaction.custID === 17);
+        const userTransactions = res.data.filter(transaction => transaction.custID === parseInt(sessionStorage.getItem('custID')));
         this.setState({ userTransactions });
         let userExpenditureSum = [0, 0, 0, 0, 0, 0]
         userTransactions.forEach(transaction => {
@@ -85,6 +86,13 @@ export default class TransactionHistory extends React.Component {
               userExpenditureSum[5] += transaction.amount
           }
         });
+
+        const userInboundTransactions = res.data.filter(transaction => transaction.payeeID === parseInt(sessionStorage.getItem('custID')));
+        userInboundTransactions.forEach(transaction => {
+          let user = this.state.users.find(user => user.custID === transaction.custID)
+          transaction['payerName'] = user.firstName + " " + user.lastName
+        });
+        this.setState({ userInboundTransactions });
 
         overallAverageExpenditure = overallAverageExpenditure.map(x => x / this.state.users.length);
 
@@ -123,11 +131,39 @@ export default class TransactionHistory extends React.Component {
     return (
       <div>
         <Navbar/>,<Session/>
-        <h1>Transaction History</h1>
+        <br></br>
+        <h1>Outbound Transaction History</h1>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Payee Name</th>
+              <th>Paying To</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Is eGift?</th>
+              <th>Message</th>
+              <th>Expenses Category</th>
+            </tr>
+          </thead>
+          <tbody>
+          { this.state.userInboundTransactions.map(transaction => 
+            <tr key={Math.random()}>
+              <td>{transaction.payerName}</td>
+              <td>{Date(transaction.dateTime)}</td>
+              <td>${transaction.amount}</td>
+              <td>{transaction.eGift? 'Yes' : 'No'}</td>
+              <td>{transaction.message}</td>
+              <td>{transaction.expensesCat}</td>
+            </tr>
+            )
+          }
+          </tbody>
+        </Table>
+        <br></br>
+        <h1>Inbound Transaction History</h1>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Payment From</th>
               <th>Date</th>
               <th>Amount</th>
               <th>Is eGift?</th>
@@ -149,6 +185,9 @@ export default class TransactionHistory extends React.Component {
           }
           </tbody>
         </Table>
+
+
+
         <br />
         <h1>Expenses Breakdown by Category</h1>
         <Doughnut
