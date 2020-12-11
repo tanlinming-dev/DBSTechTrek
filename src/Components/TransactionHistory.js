@@ -1,4 +1,6 @@
-function App() {
+import '../App.css';
+
+function TransactionHistory() {
   return (
     <div className="App">
 
@@ -6,4 +8,4 @@ function App() {
   );
 }
 
-export default App;
+export default TransactionHistory;

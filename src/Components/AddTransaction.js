@@ -1,6 +1,9 @@
+import '../App.css';
+
 function AddTransaction() {
   return (
     <div className="App">
+
     </div>
   );
 }
