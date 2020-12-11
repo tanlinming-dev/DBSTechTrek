@@ -27,7 +27,7 @@ class Session extends React.Component {
 		if (expiry < current) {
 			// Expired
 			
-			sessionStorage.clear();
+			//sessionStorage.clear();
 			
 
 			
@@ -49,8 +49,8 @@ class Session extends React.Component {
 				} else {
 					clearInterval(this.countdown);
 					
-					sessionStorage.clear();
-
+					//sessionStorage.clear();
+                    
 
 
 				}
@@ -60,7 +60,7 @@ class Session extends React.Component {
 			if (diffms < 20000) {
 				popupdelay = 0;
 			} else {
-				popupdelay = diffms - 20000;
+				popupdelay = diffms;
 			}
 
 			this.popup = setTimeout(() => {
