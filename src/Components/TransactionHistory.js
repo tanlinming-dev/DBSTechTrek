@@ -21,7 +21,7 @@ export default class TransactionHistory extends React.Component {
     };
 
     const info = {
-      'custID': 17
+      'custID': parseInt(sessionStorage.getItem('custID'))
     }
 
     axios.post(`https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/users`, null, config)
@@ -57,7 +57,7 @@ export default class TransactionHistory extends React.Component {
           }
         })
 
-        const userTransactions = res.data.filter(transaction => transaction.custID === 17);
+        const userTransactions = res.data.filter(transaction => transaction.custID === parseInt(sessionStorage.getItem('custID')));
         this.setState({ userTransactions });
         let userExpenditureSum = [0, 0, 0, 0, 0, 0]
         userTransactions.forEach(transaction => {
