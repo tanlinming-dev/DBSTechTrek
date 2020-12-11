@@ -1,7 +1,8 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-
+import Session from './Session';
+import Navbar from './Navbar';
 class ViewBalance extends React.Component {
     constructor(props) {
       super(props);
@@ -65,6 +66,7 @@ class ViewBalance extends React.Component {
   render() {
     return (
       <div>
+        <Navbar/><Session/>
         <h2>Account Details</h2>
         <Table striped bordered hover variant="dark">
           <thead>
