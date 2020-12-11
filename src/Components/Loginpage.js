@@ -21,7 +21,8 @@ function Loginpage() {
         console.log(password)
     };
 
-    const submitLogin = () => {
+    const submitLogin = (e) => {
+        e.preventDefault();
 
         axios.post('https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/login',
             JSON.stringify({ username, password }),
@@ -32,9 +33,10 @@ function Loginpage() {
                 },
             })
             .then((res) => {
-                console.log(res.data)
+                console.log(res.data);
+                localStorage.setItem("isLoggedIn", true)
                 Auth?.setLoggedIn(true);
-                history.push(`/`);
+                history.push("/");
             }).catch((error) => {
                 alert("You have entered the wrong email or username.")
                 console.log(error)
@@ -58,7 +60,7 @@ function Loginpage() {
                         <input type="text" className="form-control" placeholder="Enter Password" onChange={handlePassword} />
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-block" onClick={submitLogin}>Submit</button>
+                    <button type="submit" className="btn btn-primary btn-block" onClick={e => submitLogin(e)}>Submit</button>
                 </form>
             </div>
             <div className="col-sm" />

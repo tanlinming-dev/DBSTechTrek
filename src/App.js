@@ -36,11 +36,11 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
-      <div className="App">
-        <Router>
-          {routes}
-        </Router>
-      </div>
+    <div className="App">
+      <Router>
+        {routes}
+      </Router>
+    </div>
     </AuthContext.Provider >
   );
 }
