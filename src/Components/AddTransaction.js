@@ -2,7 +2,8 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import Datetime from 'react-datetime';
-
+import Session from './Session';
+import Navbar from './Navbar';
 class AddTransaction extends React.Component {
 	constructor(props) {
 		super(props);
@@ -214,6 +215,8 @@ class AddTransaction extends React.Component {
 	render() {
 		return (
 			<div>
+				<Navbar/><Session/>
+				<h2>Add Transaction (Your Customer ID: {this.state.custID})</h2>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Group>
 						<Form.Label>Payee ID</Form.Label>

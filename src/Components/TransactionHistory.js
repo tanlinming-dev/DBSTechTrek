@@ -2,7 +2,8 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import {Doughnut} from 'react-chartjs-2';
 import axios from 'axios';
-
+import Session from './Session';
+import Navbar from './Navbar';
 export default class TransactionHistory extends React.Component {
   state = {
     userTransactions: [],
@@ -129,6 +130,7 @@ export default class TransactionHistory extends React.Component {
   render() {
     return (
       <div>
+        <Navbar/>,<Session/>
         <br></br>
         <h1>Outbound Transaction History</h1>
         <Table striped bordered hover>
