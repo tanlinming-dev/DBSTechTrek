@@ -1,10 +1,7 @@
 import './App.css';
 import Navbar from './Components/Navbar';
 import Home from './Components/Home';
-<<<<<<< HEAD
-=======
 import ViewBalance from './Components/ViewBalance';
->>>>>>> navbar
 import TransactionHistory from './Components/TransactionHistory';
 import AddTransaction from './Components/AddTransaction';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
