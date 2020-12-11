@@ -47,6 +47,15 @@ class ViewBalance extends React.Component {
         .then((response) => {
           if (response.status === '200' || response.status === 200) {
             let accounts = response.data;
+            for (let i = 0; i < accounts.length; i++) {
+              if (accounts[i]['linked'] == true) {
+                accounts[i]['islinked'] = 'Yes';
+              }
+              else {
+                accounts[i]['islinked'] = 'No';
+              }
+            }
+            
             this.setState({ accounts: accounts });
             console.log(accounts)
           }
@@ -72,7 +81,7 @@ class ViewBalance extends React.Component {
               <td>{account.accountName}</td>
               <td>{account.accountNumber}</td>
               <td>SGD ${account.availableBal}</td>
-              <td>{(account.linked).toString()}</td>
+              <td>{account.islinked}</td>
             </tr>
             )
           }
