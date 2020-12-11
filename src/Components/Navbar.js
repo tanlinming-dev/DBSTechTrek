@@ -4,11 +4,11 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbar">
-        <a href="#">Home</a>
+        <a href="./Home">Home</a>
         <br/>
-        <a href="#">Add Transaction</a>
+        <a href="./AddTransaction">Add Transaction</a>
         <br/>
-        <a href="#">Transaction History</a>
+        <a href="./TransactionHistory">Transaction History</a>
         <br/>
         <a href="#" className="right">Sign Out</a>
       </div>
