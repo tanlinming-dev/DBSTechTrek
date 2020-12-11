@@ -6,6 +6,7 @@ import axios from 'axios';
 export default class TransactionHistory extends React.Component {
   state = {
     userTransactions: [],
+    userInboundTransactions: [],
     userExpenditureSum: [],
     overallAverageExpenditure: [],
     chartData: {},
@@ -85,6 +86,13 @@ export default class TransactionHistory extends React.Component {
           }
         });
 
+        const userInboundTransactions = res.data.filter(transaction => transaction.payeeID === parseInt(sessionStorage.getItem('custID')));
+        userInboundTransactions.forEach(transaction => {
+          let user = this.state.users.find(user => user.custID === transaction.custID)
+          transaction['payerName'] = user.firstName + " " + user.lastName
+        });
+        this.setState({ userInboundTransactions });
+
         overallAverageExpenditure = overallAverageExpenditure.map(x => x / this.state.users.length);
 
         this.setState({ overallAverageExpenditure })
@@ -121,7 +129,35 @@ export default class TransactionHistory extends React.Component {
   render() {
     return (
       <div>
-        <h1>Transaction History</h1>
+        <br></br>
+        <h1>Outbound Transaction History</h1>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Payer Name</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Is eGift?</th>
+              <th>Message</th>
+              <th>Expenses Category</th>
+            </tr>
+          </thead>
+          <tbody>
+          { this.state.userInboundTransactions.map(transaction => 
+            <tr key={Math.random()}>
+              <td>{transaction.payerName}</td>
+              <td>{Date(transaction.dateTime)}</td>
+              <td>${transaction.amount}</td>
+              <td>{transaction.eGift? 'Yes' : 'No'}</td>
+              <td>{transaction.message}</td>
+              <td>{transaction.expensesCat}</td>
+            </tr>
+            )
+          }
+          </tbody>
+        </Table>
+        <br></br>
+        <h1>Inbound Transaction History</h1>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -147,6 +183,9 @@ export default class TransactionHistory extends React.Component {
           }
           </tbody>
         </Table>
+
+
+
         <br />
         <h1>Expenses Breakdown by Category</h1>
         <Doughnut
