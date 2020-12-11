@@ -71,7 +71,7 @@ class ViewBalance extends React.Component {
             <tr>
               <th><h5>Account Name</h5></th>
               <th><h5>Account Number</h5></th>
-              <th><h5>Available Balance</h5></th>
+              <th><h5>Available Balance (SGD)</h5></th>
               <th><h5>Is Linked?</h5></th>
             </tr>
           </thead>
@@ -80,7 +80,7 @@ class ViewBalance extends React.Component {
             <tr key="{accounts.key}">
               <td>{account.accountName}</td>
               <td>{account.accountNumber}</td>
-              <td>SGD ${account.availableBal}</td>
+              <td>${account.availableBal}</td>
               <td>{account.islinked}</td>
             </tr>
             )
