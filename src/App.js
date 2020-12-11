@@ -21,6 +21,9 @@ function App() {
         <PrivateRoute path="/AddTransaction" component={AddTransaction} />
         <PrivateRoute path="/TransactionHistory" component={TransactionHistory} />
         <Route exact path='/login' component={Loginpage} />
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
       </Switch>
     );
     /*
