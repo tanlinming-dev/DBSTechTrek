@@ -34,7 +34,9 @@ function Loginpage() {
             })
             .then((res) => {
                 // console.log(res.data);
-                Auth?.setLoggedIn(true);
+                // Auth?.setLoggedIn(true);
+                sessionStorage.setItem("isLoggedIn", true);
+                sessionStorage.setItem("custID", res.data["custID"])
                 history.push("/");
             }).catch((error) => {
                 alert("You have entered the wrong email or username.")

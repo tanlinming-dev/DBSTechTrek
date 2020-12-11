@@ -6,15 +6,16 @@ import Loginpage from './Components/Loginpage';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { useState } from 'react'
 
-export const AuthContext = React.createContext(null);
+// export const AuthContext = React.createContext(null);
 
 function App() {
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  // const [isLoggedIn, setLoggedIn] = useState(false);
+  sessionStorage.setItem("isLoggedIn", false)
 
   let routes;
 
-  if (isLoggedIn) {
+  if (sessionStorage.getItem("isLoggedIn") == true) {
     routes = (
       <Switch>
         <Route path="/home" component={Home} />
@@ -35,13 +36,13 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+    // <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
     <div className="App">
       <Router>
         {routes}
       </Router>
     </div>
-    </AuthContext.Provider >
+    // </AuthContext.Provider >
   );
 }
 
