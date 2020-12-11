@@ -38,7 +38,7 @@ function Loginpage() {
 					expiry.setSeconds(expiry.getSeconds() + 60);
                 sessionStorage.setItem("expiry",expiry);
                 sessionStorage.setItem("custID", res.data["custID"])
-                history.push("/");
+                history.replace("/home");
             }).catch((error) => {
                 alert("You have entered the wrong email or username.")
                 console.log(error)

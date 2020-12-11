@@ -21,22 +21,10 @@ function App() {
 			<PrivateRoute path="/home" component={Home} />
 			<PrivateRoute path="/AddTransaction" component={AddTransaction} />
 			<PrivateRoute path="/TransactionHistory" component={TransactionHistory} />
-			{isLogin ? (
-				<Route exact path="/login">
-					<Redirect to="/home" />
-				</Route>
-			) : (
-				<Route exact path="/login" component={Loginpage} />
-			)}
-			{!isLogin ? (
-				<Route exact path="/">
-					<Redirect to="/login" />
-				</Route>
-			) : (
-				<Route exact path="/">
-					<Redirect to="/home" />
-				</Route>
-			)}
+      <Route exact path='/login' component={Loginpage} />
+			<Route exact path="/">
+				<Redirect to="/login" />
+			</Route>
 		</Switch>
 	);
 	/*
