@@ -27,7 +27,6 @@ export default class TransactionHistory extends React.Component {
     axios.post(`https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/users`, null, config)
       .then(res => {
         const users = res.data
-        console.log(res.data)
         this.setState({ users })
       })
 
@@ -90,8 +89,6 @@ export default class TransactionHistory extends React.Component {
 
         this.setState({ overallAverageExpenditure })
         this.setState({ userExpenditureSum })
-
-        console.log(userTransactions)
 
         this.setState({ chartData: { 
           labels: ['Insurance', 'Transport', 'Food', 'Entertainment', 'Shopping', 'Others'],
