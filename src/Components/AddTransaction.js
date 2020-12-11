@@ -7,7 +7,7 @@ class AddTransaction extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			custID: 7,
+			custID: '',
 			payeeID: '',
 			dateTime: new Date(),
 			amount: 0.0,
@@ -27,11 +27,14 @@ class AddTransaction extends React.Component {
 	}
 
 	componentDidMount() {
-		this.checkAmountBalance();
-		this.getPayees();
-		this.checkAmount(this.state.amount);
-		this.checkExpensesCat(this.state.expensesCat);
-		this.checkPayeeID(this.state.payeeID);
+		this.setState({custID: sessionStorage.getItem('custID')}, () =>{
+			this.checkAmountBalance();
+			this.getPayees();
+			this.checkAmount(this.state.amount);
+			this.checkExpensesCat(this.state.expensesCat);
+			this.checkPayeeID(this.state.payeeID);
+		});
+		
 	}
 
 	checkAmountBalance() {
