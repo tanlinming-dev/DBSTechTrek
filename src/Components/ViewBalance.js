@@ -32,7 +32,7 @@ class ViewBalance extends React.Component {
 
   checkAmountBalance() {
 		var data = JSON.stringify({
-			custID: this.state.custID,
+			custID: sessionStorage.getItem('custID'),
 		});
 		axios({
         method: 'post',
