@@ -21,13 +21,13 @@ class Session extends React.Component {
 	}
 	checkExpiry() {
 		let current = new Date();
-		let expiry = new Date(localStorage.getItem('expiry'));
+		let expiry = new Date(sessionStorage.getItem('expiry'));
 
 		console.log(expiry);
 		if (expiry < current) {
 			// Expired
 			
-			localStorage.removeItem('expiry');
+			sessionStorage.clear();
 			
 
 			
@@ -49,7 +49,7 @@ class Session extends React.Component {
 				} else {
 					clearInterval(this.countdown);
 					
-					localStorage.removeItem('expiry');
+					sessionStorage.clear();
 
 
 
