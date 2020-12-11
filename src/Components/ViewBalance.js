@@ -6,7 +6,7 @@ class ViewBalance extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        custID: 7,
+        custID: 17,
         payeeID: '',
         dateTime: new Date(),
         amount: 0.0,
@@ -77,7 +77,7 @@ class ViewBalance extends React.Component {
           </thead>
           <tbody>
           { this.state.accounts.map(account => 
-            <tr key="{accounts.accountName}">
+            <tr key="{accounts.key}">
               <td>{account.accountName}</td>
               <td>{account.accountNumber}</td>
               <td>SGD ${account.availableBal}</td>
