@@ -5,7 +5,9 @@ import axios from 'axios';
 
 export default class TransactionHistory extends React.Component {
   state = {
-    transactions: [],
+    userTransactions: [],
+    userExpenditureSum: [],
+    overallAverageExpenditure: [],
     chartData: {},
     users: []
   }
@@ -32,35 +34,64 @@ export default class TransactionHistory extends React.Component {
     axios.post(`https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/transaction/view`,
       info, config)
       .then(res => {
-        const transactions = res.data;
-        this.setState({ transactions });
-        let expenditureSum = [0, 0, 0, 0, 0, 0]
-        transactions.forEach(transaction => {
-          let user = this.state.users.find(user => user.custID === transaction.custID)
+        const allTransactions = res.data
+        let overallAverageExpenditure = [0, 0, 0, 0, 0, 0]
+        allTransactions.forEach(transaction => {
+          switch(transaction.expensesCat) {
+            case "Insurance":
+              overallAverageExpenditure[0] += transaction.amount
+              break
+            case "Transport":
+              overallAverageExpenditure[1] += transaction.amount
+              break
+            case "Food":
+              overallAverageExpenditure[2] += transaction.amount
+              break
+            case "Entertainment":
+              overallAverageExpenditure[3] += transaction.amount
+              break
+            case "Shopping":
+              overallAverageExpenditure[4] += transaction.amount
+              break
+            default:
+              overallAverageExpenditure[5] += transaction.amount
+          }
+        })
+
+        const userTransactions = res.data.filter(transaction => transaction.custID === 17);
+        this.setState({ userTransactions });
+        let userExpenditureSum = [0, 0, 0, 0, 0, 0]
+        userTransactions.forEach(transaction => {
+          let user = this.state.users.find(user => user.custID === transaction.payeeID)
           transaction['payeeName'] = user.firstName + " " + user.lastName
 
           switch(transaction.expensesCat) {
             case "Insurance":
-              expenditureSum[0] += transaction.amount
+              userExpenditureSum[0] += transaction.amount
               break
             case "Transport":
-              expenditureSum[1] += transaction.amount
+              userExpenditureSum[1] += transaction.amount
               break
             case "Food":
-              expenditureSum[2] += transaction.amount
+              userExpenditureSum[2] += transaction.amount
               break
             case "Entertainment":
-              expenditureSum[3] += transaction.amount
+              userExpenditureSum[3] += transaction.amount
               break
             case "Shopping":
-              expenditureSum[4] += transaction.amount
+              userExpenditureSum[4] += transaction.amount
               break
             default:
-              expenditureSum[5] += transaction.amount
+              userExpenditureSum[5] += transaction.amount
           }
         });
 
-        console.log(transactions)
+        overallAverageExpenditure = overallAverageExpenditure.map(x => x / this.state.users.length);
+
+        this.setState({ overallAverageExpenditure })
+        this.setState({ userExpenditureSum })
+
+        console.log(userTransactions)
 
         this.setState({ chartData: { 
           labels: ['Insurance', 'Transport', 'Food', 'Entertainment', 'Shopping', 'Others'],
@@ -83,7 +114,7 @@ export default class TransactionHistory extends React.Component {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)',
               ],
-              data: expenditureSum
+              data: userExpenditureSum
             }
           ]
         }})
@@ -106,7 +137,7 @@ export default class TransactionHistory extends React.Component {
             </tr>
           </thead>
           <tbody>
-          { this.state.transactions.filter(transaction => transaction.custID === 17).map(transaction => 
+          { this.state.userTransactions.map(transaction => 
             <tr key={Math.random()}>
               <td>{transaction.payeeName}</td>
               <td>{Date(transaction.dateTime)}</td>
@@ -130,6 +161,18 @@ export default class TransactionHistory extends React.Component {
           }}
         />
         <br/>
+        <ul>
+          <li>On <b>insurance</b>, you spend ${Math.abs(this.state.userExpenditureSum[0] - this.state.overallAverageExpenditure[0])}
+          {this.state.userExpenditureSum[0] > this.state.overallAverageExpenditure[0]? ' more' : ' less'} than the average consumer.</li>
+          <li>On <b>transport</b>, you spend ${Math.abs(this.state.userExpenditureSum[1] - this.state.overallAverageExpenditure[1])}
+          {this.state.userExpenditureSum[1] > this.state.overallAverageExpenditure[1]? ' more' : ' less'} than the average consumer.</li>
+          <li>On <b>food</b>, you spend ${Math.abs(this.state.userExpenditureSum[2] - this.state.overallAverageExpenditure[2])}
+          {this.state.userExpenditureSum[2] > this.state.overallAverageExpenditure[2]? ' more' : ' less'} than the average consumer.</li>
+          <li>On <b>entertainment</b>, you spend ${Math.abs(this.state.userExpenditureSum[3] - this.state.overallAverageExpenditure[3])}
+          {this.state.userExpenditureSum[4] > this.state.overallAverageExpenditure[4]? ' more' : ' less'} than the average consumer.</li>
+          <li>On <b>shopping</b>, you spend ${Math.abs(this.state.userExpenditureSum[5] - this.state.overallAverageExpenditure[5])}
+          {this.state.userExpenditureSum[5] > this.state.overallAverageExpenditure[5]? ' more' : ' less'} than the average consumer.</li>
+        </ul>
       </div>
     )
   }
