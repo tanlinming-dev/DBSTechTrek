@@ -4,9 +4,11 @@ import ViewBalance from './Components/ViewBalance';
 import TransactionHistory from './Components/TransactionHistory';
 import AddTransaction from './Components/AddTransaction';
 import Loginpage from './Components/Loginpage';
+import Session from './Components/Session';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
 import PrivateRoute from './Components/PrivateRoute';
+import Navbar from './Components/Navbar';
 // export const AuthContext = React.createContext(null);
 
 function App() {
@@ -43,6 +45,7 @@ function App() {
 	return (
 		// <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
 		<div className="App">
+      {isLogin() ? [<Navbar/>,<Session/>]:null}
 			<Router>{routes}</Router>
 		</div>
 		// </AuthContext.Provider >
