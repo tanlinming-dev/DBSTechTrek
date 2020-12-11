@@ -33,8 +33,7 @@ function Loginpage() {
                 },
             })
             .then((res) => {
-                console.log(res.data);
-                localStorage.setItem("isLoggedIn", true)
+                // console.log(res.data);
                 Auth?.setLoggedIn(true);
                 history.push("/");
             }).catch((error) => {
@@ -47,8 +46,10 @@ function Loginpage() {
         <div className="container">
             <div className="col-sm" />
             <div className="col-sm">
+                <br />
                 <form>
-                    <h3>Login</h3>
+                    <h2>Login</h2>
+                    <br />
 
                     <div className="form-group">
                         <label>Username</label>
@@ -59,6 +60,8 @@ function Loginpage() {
                         <label>Password</label>
                         <input type="text" className="form-control" placeholder="Enter Password" onChange={handlePassword} />
                     </div>
+
+                    <br />
 
                     <button type="submit" className="btn btn-primary btn-block" onClick={e => submitLogin(e)}>Submit</button>
                 </form>
