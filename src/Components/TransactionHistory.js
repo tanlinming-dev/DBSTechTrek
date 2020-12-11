@@ -134,7 +134,7 @@ export default class TransactionHistory extends React.Component {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Payer Name</th>
+              <th>Paying To</th>
               <th>Date</th>
               <th>Amount</th>
               <th>Is eGift?</th>
@@ -161,7 +161,7 @@ export default class TransactionHistory extends React.Component {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Payee Name</th>
+              <th>Payment From</th>
               <th>Date</th>
               <th>Amount</th>
               <th>Is eGift?</th>
