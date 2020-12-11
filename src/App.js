@@ -11,7 +11,9 @@ import PrivateRoute from './Components/PrivateRoute';
 function App() {
 
   // const [isLoggedIn, setLoggedIn] = useState(false);
-  
+  const isLogin = () => { 
+    return sessionStorage.getItem('isLoggedIn') === 'true' ? true: false;
+}
 
   let routes;
 
@@ -21,9 +23,11 @@ function App() {
         <PrivateRoute path="/AddTransaction" component={AddTransaction} />
         <PrivateRoute path="/TransactionHistory" component={TransactionHistory} />
         <Route exact path='/login' component={Loginpage} />
-        <Route exact path="/">
+        {!isLogin ? <Route exact path="/">
           <Redirect to="/login" />
-        </Route>
+        </Route> : <Route exact path="/">
+          <Redirect to="/home" />
+    </Route> }
       </Switch>
     );
     /*
