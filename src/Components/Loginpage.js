@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../App";
 
 function Loginpage() {
 
@@ -9,8 +8,7 @@ function Loginpage() {
     const [password, setPassword] = React.useState();
 
     const history = useHistory();
-    const Auth = useContext(AuthContext);
-
+    
     const handleUsername = (event) => {
         setUsername(event.target.value);
         console.log(username)

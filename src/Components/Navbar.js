@@ -1,14 +1,12 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from "../App";
 
 function Navbar() {
 
-  const Auth = useContext(AuthContext);
   const history = useHistory();
 
   const handleLogout = () => {
-    Auth?.setLoggedIn(false)
+    sessionStorage.clear();
     history.push(`/`)
   }
 
